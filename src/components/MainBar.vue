@@ -3,22 +3,25 @@
       <nav>
         <router-link to="/">Home</router-link>
         <img src="../assets/IMG/SUNNEE.png" alt="logo">
-        <router-link to="/about">About</router-link>
+        <router-link to="/Customize">Bottle</router-link>
       </nav>
     </header>
   </template>
-  
+  <script>
+    export default {
+      name: 'MainBar',
+    };
+  </script>
   <style scoped>
   .main-bar {
     background-color: #333;
     color: #fff;
     padding: 10px;
-    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
     width: 100%;
     box-sizing: border-box;
+    height: 70px;
   }
   
   nav {
@@ -39,7 +42,7 @@
 
   img {
     filter: invert(1);
-    width: 100px;
+    width: 150px;
   }
 
   </style>

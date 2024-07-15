@@ -11,7 +11,7 @@
       <div class="title-container">
         <p>SUNNEE CUSTOM EXPERIENCE</p>
         <h2>CREA LA TUA BORRACCIA SUNNEE</h2>
-        <router-link to="/about">
+        <router-link to="/Customize">
           <button>PERSONALIZZA ORA</button>
         </router-link>
       </div>
@@ -72,6 +72,7 @@ html, body {
   transform: translateX(-50%);
   padding: 10px;
   width: 80%;
+  color: aliceblue;
 }
 
 .title-container p {

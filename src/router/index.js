@@ -2,7 +2,7 @@
 
 import { createRouter, createWebHistory } from 'vue-router';
 import WelcomePage from '../views/WelcomePage.vue';
-import AboutPage from '../views/AboutPage.vue';
+import CustomizePage from '../views/CustomizePage.vue';
 
 const routes = [
   {
@@ -11,9 +11,9 @@ const routes = [
     component: WelcomePage
   },
   {
-    path: '/about',
-    name: 'About',
-    component: AboutPage
+    path: '/Customize',
+    name: 'Customize',
+    component: CustomizePage
   }
 ];
 
