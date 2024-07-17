@@ -5,10 +5,11 @@
     <div class="customize-section">
       <div class="bottle-img">
         <img :src="baseImg" alt="Borraccia" />
-        <img v-if="currentPart !== 'bottle'" :src="getPartImage('cap')" alt="Tappo della Borraccia" />
-        <img v-if="currentPart !== 'bottle'" :src="getPartImage('holder')" alt="Manico della Borraccia" />
+        <img :src="capImg" alt="Tappo della Borraccia" />
+        <img :src="holderImg" alt="Manico della Borraccia" />
       </div>
       <div class="color-selector">
+        <!-- Includi il componente ColorSelector -->
         <ColorSelector :colors="colors" :currentPart="currentPart" @colorSelected="updateColor" />
       </div>
     </div>
@@ -35,39 +36,27 @@ export default {
   data() {
     return {
       currentPart: 'bottle', // Parte iniziale da visualizzare (bottiglia)
-      colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#f0f0f0', '#ff9900', '#9900ff', '#0099ff'], // Array di colori disponibili
-      imgPath: '../assets/IMG/', // Percorso delle immagini
-      baseImg: '../assets/IMG/bottle_white.jpg', // Immagine base della bottiglia (bianca)
-      capImg: '', // Immagine del tappo della bottiglia
-      holderImg: '', // Immagine del manico della bottiglia
+      colors: ['white', 'black', 'blue', 'grey', 'green', 'lightblue', 'pink', 'brown', 'yellow', 'red'], // Array di colori disponibili
+      baseImg: require('../assets/IMG/bottle_white.png'), // Immagine base della bottiglia (bianca)
+      capImg: require('../assets/IMG/cap_white.png'), // Immagine del tappo della bottiglia
+      holderImg: require('../assets/IMG/holder_white.png'), // Immagine del manico della bottiglia
     };
-  },
-  mounted() {
-    // Carica le immagini base (bianche) all'avvio
-    this.capImg = this.getPartImage('cap');
-    this.holderImg = this.getPartImage('holder');
   },
   methods: {
     updateColor(color) {
-      // Aggiorna il colore della parte corrente della borraccia
       this.setPartColor(this.currentPart, color);
     },
     setPartColor(part, color) {
-      // Aggiorna dinamicamente il percorso dell'immagine per la parte specificata con il colore selezionato
       if (part === 'bottle') {
-        this.baseImg = `${this.imgPath}${part}_${color}.jpg`;
+        this.baseImg = require(`@/assets/IMG/${part}_${color}.png`);
       } else {
-        this.$set(this, `${part}Img`, `${this.imgPath}${part}_${color}.jpg`);
+        this[`${part}Img`] = require(`@/assets/IMG/${part}_${color}.png`);
       }
     },
     nextPart() {
-      // Avanza alla parte successiva (se necessario)
-      // Esempio: this.currentPart = 'cap';
-    },
-    getPartImage(part) {
-      // Restituisce l'immagine corretta per la parte specificata della borraccia
-      // Se non è ancora stato selezionato un colore, restituisce l'immagine base (bianca)
-      return part === 'bottle' ? this.baseImg : `${this.imgPath}${part}_white.jpg`;
+      const parts = ['bottle', 'cap', 'holder'];
+      const currentIndex = parts.indexOf(this.currentPart);
+      this.currentPart = parts[(currentIndex + 1) % parts.length];
     },
   },
 };
@@ -88,7 +77,7 @@ export default {
 
 .bottle-img {
   width: 50%;
-  background-color: rgba(245, 245, 245, 0.359);
+  background-color: rgba(34, 31, 31, 0.359);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,4 +100,6 @@ export default {
   height: 100px;
 }
 </style>
+
+
 
