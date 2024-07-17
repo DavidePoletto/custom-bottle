@@ -4,31 +4,29 @@
       <h2>Seleziona il colore per il {{ currentPart }}</h2>
       <p>Il colore è molto importante</p>
     </div>
-    <div class="swiper-container">
-      <div class="navigation-buttons">
-        <button @click="goPrev" class="navigation-button prev-button">
-          <svg class="arrow" viewBox="0 0 24 24">
-            <path d="M15.41 16.58L10.83 12l4.58-4.58L14 6l-6 6 6 6z"/>
-          </svg>
-        </button>
-        <button @click="goNext" class="navigation-button next-button">
-          <svg class="arrow" viewBox="0 0 24 24">
-            <path d="M8.59 16.58L13.17 12l-4.58-4.58L10 6l6 6-6 6z"/>
-          </svg>
-        </button>
-      </div>
-      <div class="swiper-wrapper">
-        <div v-for="button in buttons" :key="button.id" class="swiper-slide">
-          <button @click="handleButtonClick(button.id)"
-                  :style="{ backgroundColor: colors[(button.id - 1) % colors.length] }"
-                  :class="{ active: button.id === activeButton }"
-                  class="my-button">
-          </button>
+    <div class="swiper-navigation-container">
+      <button @click="goPrev" class="navigation-button prev-button">
+        <svg class="arrow" viewBox="0 0 24 24">
+          <path d="M15.41 16.58L10.83 12l4.58-4.58L14 6l-6 6 6 6z"/>
+        </svg>
+      </button>
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div v-for="button in buttons" :key="button.id" class="swiper-slide">
+            <button @click="handleButtonClick(button.id)"
+                    :style="{ backgroundColor: colors[(button.id - 1) % colors.length] }"
+                    :class="{ active: button.id === activeButton }"
+                    class="my-button">
+            </button>
+          </div>
         </div>
+        <div class="swiper-pagination"></div>
       </div>
-      <div class="swiper-fade-left"></div> <!-- Div per effetto di fade sinistro -->
-      <div class="swiper-fade-right"></div> <!-- Div per effetto di fade destro -->
-      <div class="swiper-pagination"></div>
+      <button @click="goNext" class="navigation-button next-button">
+        <svg class="arrow" viewBox="0 0 24 24">
+          <path d="M8.59 16.58L13.17 12l-4.58-4.58L10 6l6 6-6 6z"/>
+        </svg>
+      </button>
     </div>
   </div>
 </template>
@@ -39,9 +37,12 @@ import 'swiper/swiper-bundle.css';
 
 export default {
   name: 'ColorSelector',
+  props: {
+    colors: Array,
+    currentPart: String,
+  },
   data() {
     return {
-      currentPart: 'componente', // Aggiungi la parte corrente come variabile data se necessario
       buttons: [
         { id: 1 },
         { id: 2 },
@@ -55,7 +56,6 @@ export default {
         { id: 10 },
       ],
       activeButton: 1, // Id del bottone attualmente attivo
-      colors: ['#3498db', '#e74c3c', '#2ecc71', '#f39c12', '#9b59b6', '#1abc9c', '#f1c40f', '#e67e22', '#34495e', '#95a5a6'],
       swiper: null,
     };
   },
@@ -71,16 +71,15 @@ export default {
           el: '.swiper-pagination',
           clickable: true,
         },
-        scrollbar: {
-          el: '.swiper-scrollbar',
-          hide: true,
-        },
         loop: true,
-        loopFillGroupWithBlank: true,
+        loopAdditionalSlides: 1,
+        loopedSlides: 10, // Numero totale di bottoni
       });
     },
     handleButtonClick(buttonId) {
-      this.activeButton = buttonId; // Imposta il bottone attivo quando viene cliccato
+      const color = this.colors[(buttonId - 1) % this.colors.length];
+      this.activeButton = buttonId;
+      this.$emit('colorSelected', color); // Passa il colore invece dell'ID del bottone
     },
     goNext() {
       if (this.swiper) {
@@ -110,8 +109,15 @@ export default {
   margin-bottom: 20px;
 }
 
+.swiper-navigation-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 60%; /* Puoi regolare questa larghezza come necessario */
+}
+
 .swiper-container {
-  width: 60%;
+  width: 100%;
   position: relative;
   overflow: hidden; /* Nasconde il contenuto che esce */
 }
@@ -134,20 +140,6 @@ export default {
   cursor: pointer;
   position: relative;
   z-index: 1;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 90%, rgba(255, 255, 255, 0)),
-              linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.6) 30%, rgba(255, 255, 255, 0));
-}
-
-
-
-.navigation-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 30;
 }
 
 .navigation-button {
@@ -155,7 +147,7 @@ export default {
   border: none;
   cursor: pointer;
   pointer-events: all; /* Rendere i pulsanti interagibili */
-  fill: #3498db;
+  fill: #ff9900;
   display: flex;
   align-items: center;
 }
@@ -165,28 +157,17 @@ export default {
 }
 
 .arrow {
-  width: 24px;
-  height: 24px;
+  width: 50px;
+  height: 50px;
 }
 
-/* Effetto di fade ai lati dello Swiper */
-.swiper-fade-left,
-.swiper-fade-right {
+.swiper-pagination {
   position: absolute;
-  top: 0;
   bottom: 0;
-  width: 50px; /* Larghezza del fade */
-  z-index: 10;
-  pointer-events: none; /* Non interagibile */
-}
-
-.swiper-fade-left {
   left: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.2));
+  width: 100%;
+  text-align: center;
 }
 
-.swiper-fade-right {
-  right: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5));
-}
 </style>
+

@@ -4,9 +4,9 @@
     <ProgressBar />
     <div class="customize-section">
       <div class="bottle-img">
-        <img :src="bottleImages.body" alt="Corpo della Borraccia" />
-        <img :src="bottleImages.cap" alt="Tappo della Borraccia" />
-        <img :src="bottleImages.bottom" alt="Fondo della Borraccia" />
+        <img :src="baseImg" alt="Borraccia" />
+        <img v-if="currentPart !== 'bottle'" :src="getPartImage('cap')" alt="Tappo della Borraccia" />
+        <img v-if="currentPart !== 'bottle'" :src="getPartImage('holder')" alt="Manico della Borraccia" />
       </div>
       <div class="color-selector">
         <ColorSelector :colors="colors" :currentPart="currentPart" @colorSelected="updateColor" />
@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import MainBar from '@/components/MainBar.vue';
 import ProgressBar from '@/components/ProgressBar.vue';
+import MainBar from '@/components/MainBar.vue';
 import FooterInformation from '@/components/FooterInformation.vue';
 import ColorSelector from '@/components/ColorSelector.vue';
 
@@ -34,28 +34,40 @@ export default {
   },
   data() {
     return {
-      currentPart: 'body', // Parte iniziale da personalizzare
-      bottleImages: {
-        body: require('@/assets/IMG/bottle-body.png'),
-        cap: require('@/assets/IMG/bottle-cap.png'),
-        bottom: require('@/assets/IMG/bottle-bottom.png'),
-      },
-      colors: ['#FF5733', '#33FF57', '#3357FF', '#F0F033', '#F033F0', '#33F0F0', '#FF33A8', '#A833FF', '#FF8F33', '#33FF8F'],
+      currentPart: 'bottle', // Parte iniziale da visualizzare (bottiglia)
+      colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#f0f0f0', '#ff9900', '#9900ff', '#0099ff'], // Array di colori disponibili
+      imgPath: '../assets/IMG/', // Percorso delle immagini
+      baseImg: '../assets/IMG/bottle_white.jpg', // Immagine base della bottiglia (bianca)
+      capImg: '', // Immagine del tappo della bottiglia
+      holderImg: '', // Immagine del manico della bottiglia
     };
+  },
+  mounted() {
+    // Carica le immagini base (bianche) all'avvio
+    this.capImg = this.getPartImage('cap');
+    this.holderImg = this.getPartImage('holder');
   },
   methods: {
     updateColor(color) {
-      console.log(`Colore selezionato per ${this.currentPart}: ${color}`);
-      // Implementa qui la logica per aggiornare il colore
+      // Aggiorna il colore della parte corrente della borraccia
+      this.setPartColor(this.currentPart, color);
+    },
+    setPartColor(part, color) {
+      // Aggiorna dinamicamente il percorso dell'immagine per la parte specificata con il colore selezionato
+      if (part === 'bottle') {
+        this.baseImg = `${this.imgPath}${part}_${color}.jpg`;
+      } else {
+        this.$set(this, `${part}Img`, `${this.imgPath}${part}_${color}.jpg`);
+      }
     },
     nextPart() {
-      const parts = ['body', 'cap', 'bottom'];
-      const currentIndex = parts.indexOf(this.currentPart);
-      if (currentIndex < parts.length - 1) {
-        this.currentPart = parts[currentIndex + 1];
-      } else {
-        console.log('Personalizzazione completata');
-      }
+      // Avanza alla parte successiva (se necessario)
+      // Esempio: this.currentPart = 'cap';
+    },
+    getPartImage(part) {
+      // Restituisce l'immagine corretta per la parte specificata della borraccia
+      // Se non è ancora stato selezionato un colore, restituisce l'immagine base (bianca)
+      return part === 'bottle' ? this.baseImg : `${this.imgPath}${part}_white.jpg`;
     },
   },
 };
@@ -99,3 +111,4 @@ export default {
   height: 100px;
 }
 </style>
+
