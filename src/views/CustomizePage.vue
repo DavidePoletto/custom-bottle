@@ -9,7 +9,6 @@
         <img :src="holderImg" alt="Manico della Borraccia" />
       </div>
       <div class="color-selector">
-        <!-- Includi il componente ColorSelector -->
         <ColorSelector :colors="colors" :currentPart="currentPart" @colorSelected="updateColor" />
       </div>
     </div>
@@ -37,6 +36,7 @@ export default {
     return {
       currentPart: 'bottle', // Parte iniziale da visualizzare (bottiglia)
       colors: ['white', 'black', 'blue', 'grey', 'green', 'lightblue', 'pink', 'brown', 'yellow', 'red'], // Array di colori disponibili
+      imgPath: '../assets/IMG/', // Percorso delle immagini
       baseImg: require('../assets/IMG/bottle_white.png'), // Immagine base della bottiglia (bianca)
       capImg: require('../assets/IMG/cap_white.png'), // Immagine del tappo della bottiglia
       holderImg: require('../assets/IMG/holder_white.png'), // Immagine del manico della bottiglia
@@ -77,7 +77,7 @@ export default {
 
 .bottle-img {
   width: 50%;
-  background-color: rgba(34, 31, 31, 0.359);
+  background-color: rgba(245, 245, 245, 0.359);
   display: flex;
   justify-content: center;
   align-items: center;
