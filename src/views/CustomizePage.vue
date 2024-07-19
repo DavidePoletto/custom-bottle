@@ -1,7 +1,7 @@
 <template>
   <div class="customize-page">
     <MainBar />
-    <ProgressBar />
+    <ProgressBar :currentPart="currentPart" @partSelected="handlePartSelected" ref="progressBar" />
     <div class="customize-section">
       <div class="bottle-img">
         <img :src="baseImg" alt="Borraccia" />
@@ -56,7 +56,12 @@ export default {
     nextPart() {
       const parts = ['bottle', 'cap', 'holder'];
       const currentIndex = parts.indexOf(this.currentPart);
-      this.currentPart = parts[(currentIndex + 1) % parts.length];
+      const nextPart = parts[(currentIndex + 1) % parts.length];
+      this.currentPart = nextPart;
+      this.$refs.progressBar.unlockNextPart();
+    },
+    handlePartSelected(part) {
+      this.currentPart = part;
     },
   },
 };
@@ -77,7 +82,7 @@ export default {
 
 .bottle-img {
   width: 50%;
-  background-color: rgba(245, 245, 245, 0.359);
+  background-color: rgba(139, 137, 137, 0.359);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,6 +105,4 @@ export default {
   height: 100px;
 }
 </style>
-
-
 

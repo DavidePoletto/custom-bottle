@@ -1,40 +1,70 @@
 <template>
-    <div class="progress-bar">
-      <ul class="steps">
-        <li>1.CORPO</li>
-        <li>2.TAPPO</li>
-        <li>3.FONDO</li>
-      </ul>
+  <div class="progress-bar">
+    <div
+      v-for="part in parts"
+      :key="part"
+      :class="{ 'active': part === currentPart, 'unlocked': isUnlocked(part) }"
+      @click="selectPart(part)"
+    >
+      {{ part }}
     </div>
-  </template>
-  <script>
-  export default {
-    name: 'ProgressBar',
-  };
-  </script>
-  
-  <style scoped>
-  .progress-bar {
-    width: 100%;
-    background-color: rgb(242, 239, 239);
-    box-shadow: 0 2px 20px rgba(61, 61, 61, 0.2);
-    z-index: 1;
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    currentPart: {
+      type: String,
+      required: true
+    },
+  },
+  data() {
+    return {
+      parts: ['bottle', 'cap', 'holder'], // parti della borraccia
+      unlockedParts: ['bottle'] // parte iniziale sbloccata
+    };
+  },
+  methods: {
+    selectPart(part) {
+      if (this.isUnlocked(part)) {
+        this.$emit('partSelected', part);
+      }
+    },
+    unlockNextPart() {
+      const currentIndex = this.parts.indexOf(this.currentPart);
+      const nextPart = this.parts[currentIndex + 1];
+      if (nextPart && !this.unlockedParts.includes(nextPart)) {
+        this.unlockedParts.push(nextPart);
+      }
+    },
+    isUnlocked(part) {
+      return this.unlockedParts.includes(part);
+    }
   }
-  
-  .steps {
-    display: flex;
-    justify-content: center;
-    column-gap: 50px;
-    padding: 0;
-    margin: 0;
-    font-size: 14px;
-    color: rgb(94, 94, 94);
-  }
-  
-  .steps li {
-    list-style-type: none;
-    padding: 15px;
-  }
-  </style>
-  
-  
+};
+</script>
+
+<style scoped>
+.progress-bar {
+  display: flex;
+  justify-content: center;
+  column-gap: 20%;
+  font-size: 14px;
+  padding: 15px;
+  box-shadow: 0 2px 20px rgba(61, 61, 61, 0.2);
+  text-transform: uppercase;
+}
+.progress-bar div {
+  cursor: pointer;
+  color: grey;
+}
+.progress-bar div.active, .progress-bar div.unlocked {
+  color: rgb(120, 119, 119);
+}
+.progress-bar div.active {
+  font-weight: 900;
+  text-decoration: underline;
+  color: rgb(255, 123, 0);
+}
+</style>
