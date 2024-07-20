@@ -1,8 +1,8 @@
 <template>
   <div class="color-container">
     <div class="title-section">
-      <h2>Seleziona il colore per il {{ currentPart }}</h2>
-      <p>Il colore è molto importante</p>
+      <h2>Current part: {{ currentPart }}</h2>
+      <p>Select a color for the {{ currentPart }}</p>
     </div>
     <div class="swiper-navigation-container">
       <button @click="goPrev" class="navigation-button prev-button">
@@ -11,6 +11,7 @@
         </svg>
       </button>
       <div class="swiper-container">
+        <div class="fade-left"></div>
         <div class="swiper-wrapper">
           <div v-for="(color, index) in colors" :key="index" class="swiper-slide">
             <button @click="handleButtonClick(color)"
@@ -21,6 +22,7 @@
           </div>
         </div>
         <div class="swiper-pagination"></div>
+        <div class="fade-right"></div>
       </div>
       <button @click="goNext" class="navigation-button next-button">
         <svg class="arrow" viewBox="0 0 24 24">
@@ -54,14 +56,18 @@ export default {
     initSwiper() {
       this.swiper = new Swiper('.swiper-container', {
         slidesPerView: 'auto',
-        spaceBetween: 10,
+        spaceBetween: 5,
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
         },
-        loop: true,
+        loop: false,
         loopAdditionalSlides: 1,
         loopedSlides: this.colors.length,
+        effect: 'fade', // Aggiungi l'effetto fade
+        fadeEffect: {
+          crossFade: true
+        },
       });
     },
     handleButtonClick(color) {
@@ -94,6 +100,7 @@ export default {
 
 .title-section {
   margin-bottom: 20px;
+  line-height: 15px;
 }
 
 .swiper-navigation-container {
@@ -107,6 +114,25 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
+}
+
+.fade-left, .fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fade-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 60%);
+}
+
+.fade-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 60%);
 }
 
 .swiper-wrapper {
@@ -127,6 +153,18 @@ export default {
   cursor: pointer;
   position: relative;
   z-index: 1;
+  border: 1px solid rgb(195, 195, 195);
+  transition: 0.2s;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0)),
+              linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4) 40%, rgba(255, 255, 255, 0.2));
+}
+
+.my-button:hover {
+  transform: scale(1.2);
+}
+
+.my-button.active {
+  border: 2px solid rgb(255, 132, 0);
 }
 
 .navigation-button {
@@ -137,22 +175,22 @@ export default {
   fill: #ff9900;
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
 .navigation-button:hover {
-  fill: #2980b9;
+  fill: #ff6200;
 }
 
 .arrow {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 .swiper-pagination {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
   text-align: center;
 }
 </style>

@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="footer">
-      <FooterInformation @next="nextPart" />
+      <FooterInformation :modifications="modifications" :isLastPart="isLastPart" @next="nextPart" @finish="goToThankYouPage" />
     </div>
   </div>
 </template>
@@ -40,11 +40,22 @@ export default {
       baseImg: require('../assets/IMG/bottle_white.png'), // Immagine base della bottiglia (bianca)
       capImg: require('../assets/IMG/cap_white.png'), // Immagine del tappo della bottiglia
       holderImg: require('../assets/IMG/holder_white.png'), // Immagine del manico della bottiglia
+      modifications: {
+        bottle: 'white',
+        cap: 'white',
+        holder: 'white'
+      }
     };
+  },
+  computed: {
+    isLastPart() {
+      return this.currentPart === 'holder';
+    }
   },
   methods: {
     updateColor(color) {
       this.setPartColor(this.currentPart, color);
+      this.modifications[this.currentPart] = color; // Aggiorna il riepilogo delle modifiche
     },
     setPartColor(part, color) {
       if (part === 'bottle') {
@@ -63,6 +74,16 @@ export default {
     handlePartSelected(part) {
       this.currentPart = part;
     },
+    goToThankYouPage() {
+      this.$router.push({
+        path: '/thank-you',
+        query: {
+          bottle: this.modifications.bottle,
+          cap: this.modifications.cap,
+          holder: this.modifications.holder
+        }
+      });
+    }
   },
 };
 </script>
@@ -82,7 +103,7 @@ export default {
 
 .bottle-img {
   width: 50%;
-  background-color: rgba(139, 137, 137, 0.359);
+  background-color: rgba(208, 207, 207, 0.359);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,4 +126,3 @@ export default {
   height: 100px;
 }
 </style>
-

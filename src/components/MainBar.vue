@@ -22,6 +22,7 @@
     width: 100%;
     box-sizing: border-box;
     height: 70px;
+    
   }
   
   nav {

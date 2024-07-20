@@ -10,9 +10,9 @@
       </div>
       <div class="title-container">
         <p>SUNNEE CUSTOM EXPERIENCE</p>
-        <h2>CREA LA TUA BORRACCIA SUNNEE</h2>
+        <h2>CREATE YOUR SUNNEE BOTTLE</h2>
         <router-link to="/Customize">
-          <button>PERSONALIZZA ORA</button>
+          <button>CUSTOMIZE NOW</button>
         </router-link>
       </div>
     </div>

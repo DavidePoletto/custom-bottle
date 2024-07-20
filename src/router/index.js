@@ -3,6 +3,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import WelcomePage from '../views/WelcomePage.vue';
 import CustomizePage from '../views/CustomizePage.vue';
+import ThankYouPage from '../views/ThankYouPage.vue';
 
 const routes = [
   {
@@ -14,6 +15,11 @@ const routes = [
     path: '/Customize',
     name: 'Customize',
     component: CustomizePage
+  },
+  {
+    path: '/thank-You',
+    name: 'ThankYou',
+    component: ThankYouPage
   }
 ];
 
