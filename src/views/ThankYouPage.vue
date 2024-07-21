@@ -19,7 +19,7 @@
       </div>
       <div class="footer-container">
         <footer>
-          <button @click="goBack" class="go-back">GO BACK</button>
+          <RouterLink to="/Customize"><button class="go-back">GO BACK</button></RouterLink>
           <button class="check-out">CHECK OUT</button>
         </footer>
       </div>
@@ -59,9 +59,6 @@ export default {
       this.capImg = require(`@/assets/IMG/cap_${this.capColor}.png`);
       this.holderImg = require(`@/assets/IMG/holder_${this.holderColor}.png`);
     },
-    goBack() {
-      this.$router.push({ path: '/customize' });
-    }
   }
 };
 </script>
@@ -162,7 +159,7 @@ footer {
   color: #ff7700;
   background-color: transparent;
   margin: 10px;
-  width: 40%;
+  width: 200px;
   transition: 0.3s;
 }
 
@@ -201,7 +198,7 @@ footer {
   background-color: #ff8800;
   color: #fff;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  transition: 0.3s;
 }
 
 .newsletter-signup button.subscribe:hover {
@@ -233,6 +230,7 @@ footer {
 
   .check-out, .go-back {
     padding: 12px;
+    width: auto;
   }
 
   .newsletter-signup input[type="email"] {

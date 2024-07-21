@@ -16,6 +16,23 @@
         </router-link>
       </div>
     </div>
+    <div class="box-container">
+      <div class="box box1">
+        <h2>Recycle♻️</h2>
+        <p>The importance of recycling cannot be underestimated. Recycling helps reduce the amount of waste in our oceans and landfills, conserves natural resources, and reduces our carbon footprint. Actively participating in recycling is a crucial step towards a sustainable future for the next generations.</p>
+      </div>
+      <div class="box box2">
+        <img src="../assets/IMG/recycle.jpg" alt="recycle img">
+      </div>
+      <div class="box box3">
+        <img src="../assets/IMG/bottle-recycle.jpg" alt="bottle img">
+      </div>
+      <div class="box box4">
+        <h2>Our Bottle!</h2>
+        <p>Discover our exclusive bottle, made entirely from recycled materials. With your first order, you will receive this bottle as a gift, a small contribution to reducing the use of single-use plastics and promoting an eco-friendly lifestyle. Join us in making a difference!</p>
+        <RouterLink to="/customize"><button>CUSTOMIZE NOW</button></RouterLink>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,7 +55,7 @@ html, body {
 }
 
 .welcome-page {
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +84,6 @@ html, body {
 
 .title-container {
   position: absolute;
-  bottom: 200px;
   left: 50%;
   transform: translateX(-50%);
   padding: 10px;
@@ -102,4 +118,101 @@ button:hover {
   transition-duration: 0.6s;
 }
 
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: 120vh;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff6f9;
+  color: #333;
+  font-size: 1em;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.5);
+}
+
+.box h2{
+  margin: 0;
+  color: #333;
+  font-size: 26px;
+}
+
+.box1 {
+  grid-area: 1 / 1 / 2 / 2;
+  padding: 60px;
+}
+
+.box2 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.box3 {
+  grid-area: 2 / 1 / 3 / 2;
+}
+
+.box4 {
+  grid-area: 2 / 2 / 3 / 3;
+  padding: 60px;
+  background-color: #e3fbff;
+}
+
+.box4 button {
+  color: #333333ca;
+  border: 1px solid #333333a0;
+  width: 200px;
+}
+
+.box4 button:hover {
+  background-color: #333;
+  color: aliceblue;
+}
+
+@media (max-width: 768px) {
+  .box-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .box {
+    height: 300px;
+    width: 100%;
+    align-items: start;
+    text-align: left;
+  }
+
+  .box p {
+    font-size: 12px;
+  }
+
+  .box4, .box1 {
+    height: 200px;
+    padding: 10px;
+  }
+
+  .box h2 {
+    font-size: 19px;
+    text-transform: uppercase;
+  }
+
+  .box1{order: 1;}
+  .box2{order: 2;}
+  .box3{order: 4;}
+  .box4{order: 3;}
+
+}
 </style>
