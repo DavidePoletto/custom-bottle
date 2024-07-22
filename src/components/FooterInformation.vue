@@ -68,7 +68,6 @@ button:hover {
   align-items: center;
   font-size: 15px;
   column-gap: 5px;
-  width: 200px;
   padding: 20px;
 }
 
@@ -80,5 +79,29 @@ button:hover {
 
 .changes {
   display: flex;
+}
+
+@media (max-width: 768px) {
+  .summary {
+    padding: 0;
+    width: auto;
+  }
+
+  .summary h3 {
+    font-size: 12px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-container button {
+    margin: 0;
+    padding: 15px;
+  }
+
+  .changes {
+    font-size: 12px;
+  }
 }
 </style>

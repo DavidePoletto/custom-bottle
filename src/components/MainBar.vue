@@ -21,7 +21,7 @@
     left: 0;
     width: 100%;
     box-sizing: border-box;
-    height: 70px;
+    height: 90px;
     
   }
   
@@ -35,6 +35,8 @@
     color: #fff;
     text-decoration: none;
     padding: 0 10px;
+    font-size: large;
+    font-weight: 600;
   }
   
   nav a:hover {
@@ -43,7 +45,7 @@
 
   img {
     filter: invert(1);
-    width: 150px;
+    width: 180px;
   }
 
   </style>

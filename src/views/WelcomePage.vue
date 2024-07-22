@@ -55,7 +55,7 @@ html, body {
 }
 
 .welcome-page {
-  height: 70vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,26 +130,29 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fff6f9;
+  background-color: #fffdf7;
   color: #333;
-  font-size: 1em;
   box-sizing: border-box;
   overflow: hidden;
   text-align: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(1.5);
+  filter: brightness(80%);
 }
 
 .box h2{
   margin: 0;
   color: #333;
   font-size: 26px;
+  font-weight: 900;
 }
 
 .box1 {
@@ -168,7 +171,7 @@ button:hover {
 .box4 {
   grid-area: 2 / 2 / 3 / 3;
   padding: 60px;
-  background-color: #e3fbff;
+  background-color: #e6e6e6;
 }
 
 .box4 button {
@@ -183,30 +186,37 @@ button:hover {
 }
 
 @media (max-width: 768px) {
+
+  .welcome-page {
+    height: 85vh;
+  }
+
   .box-container {
     display: flex;
     flex-direction: column;
+    height: 200vh;
   }
 
   .box {
-    height: 300px;
+    height: 700px;
     width: 100%;
     align-items: start;
     text-align: left;
   }
 
   .box p {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .box4, .box1 {
-    height: 200px;
-    padding: 10px;
+    height: 300px;
+    padding: 30px;
   }
 
   .box h2 {
     font-size: 19px;
     text-transform: uppercase;
+    font-weight: 900;
   }
 
   .box1{order: 1;}

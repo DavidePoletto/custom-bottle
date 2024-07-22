@@ -82,7 +82,7 @@ export default {
   border: 1px solid #ddd;
   border-radius: 15px;
   overflow: hidden;
-  background-color: #bdbdbd;
+  background-color: #dbd8d8;
   box-shadow:  0 4px 8px rgba(0, 0, 0, 0.051);
 }
 

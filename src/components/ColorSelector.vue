@@ -193,4 +193,23 @@ export default {
   left: 0;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+
+  .title-section h2 {
+    margin: 0px;
+  }
+
+  .title-section p {
+    display: none;
+  }
+
+  .swiper-navigation-container {
+    width: 80%;
+  }
+
+  .arrow {
+    width: 25px;
+  }
+}
 </style>
