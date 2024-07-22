@@ -129,17 +129,17 @@ export default {
 @media (max-width: 768px) {
   .customize-section {
     flex-direction: column;
-    height: 65%;
+    height: 60vh;
   }
 
   .bottle-img {
     width: 100%;
-    height: 80vh;
+    height: 100%;
   }
 
   .color-selector {
     width: 100%;
-    height: 35%;
+    height: 200px;
   }
 }
 
