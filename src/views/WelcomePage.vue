@@ -3,7 +3,7 @@
     <MainBar />
     <div class="welcome-page">
       <div class="video-background">
-        <video autoplay muted loop class="video-bg">
+        <video autoplay muted loop playsinline class="video-bg">
           <source src="../assets/Video/backgroundVideo.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -80,6 +80,7 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .title-container {
