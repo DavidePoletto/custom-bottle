@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      activeColor: this.colors[0], // Colore attualmente attivo
+      activeColor: this.colors[0],
       swiper: null,
     };
   },
@@ -64,7 +64,7 @@ export default {
         loop: false,
         loopAdditionalSlides: 1,
         loopedSlides: this.colors.length,
-        effect: 'fade', // Aggiungi l'effetto fade
+        effect: 'fade',
         fadeEffect: {
           crossFade: true
         },
@@ -72,7 +72,7 @@ export default {
     },
     handleButtonClick(color) {
       this.activeColor = color;
-      this.$emit('colorSelected', color); // Passa il colore selezionato
+      this.$emit('colorSelected', color);
     },
     goNext() {
       if (this.swiper) {

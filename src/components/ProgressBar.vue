@@ -21,8 +21,8 @@ export default {
   },
   data() {
     return {
-      parts: ['bottle', 'cap', 'holder'], // parti della borraccia
-      unlockedParts: ['bottle'] // parte iniziale sbloccata
+      parts: ['bottle', 'cap', 'holder'],
+      unlockedParts: ['bottle']
     };
   },
   methods: {

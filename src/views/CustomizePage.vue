@@ -34,12 +34,12 @@ export default {
   },
   data() {
     return {
-      currentPart: 'bottle', // Parte iniziale da visualizzare (bottiglia)
-      colors: ['white', 'black', 'blue', 'grey', 'green', 'lightblue', 'pink', 'brown', 'yellow', 'red'], // Array di colori disponibili
-      imgPath: '../assets/IMG/', // Percorso delle immagini
-      baseImg: require('../assets/IMG/bottle_white.png'), // Immagine base della bottiglia (bianca)
-      capImg: require('../assets/IMG/cap_white.png'), // Immagine del tappo della bottiglia
-      holderImg: require('../assets/IMG/holder_white.png'), // Immagine del manico della bottiglia
+      currentPart: 'bottle',
+      colors: ['white', 'black', 'blue', 'grey', 'green', 'lightblue', 'pink', 'brown', 'yellow', 'red'],
+      imgPath: '../assets/IMG/',
+      baseImg: require('../assets/IMG/bottle_white.png'),
+      capImg: require('../assets/IMG/cap_white.png'),
+      holderImg: require('../assets/IMG/holder_white.png'),
       modifications: {
         bottle: 'white',
         cap: 'white',
@@ -55,7 +55,7 @@ export default {
   methods: {
     updateColor(color) {
       this.setPartColor(this.currentPart, color);
-      this.modifications[this.currentPart] = color; // Aggiorna il riepilogo delle modifiche
+      this.modifications[this.currentPart] = color;
     },
     setPartColor(part, color) {
       if (part === 'bottle') {
