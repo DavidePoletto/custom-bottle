@@ -9,7 +9,7 @@
 
 ## About The Project
 
-<a href="https://sunnecustombottle.netlify.app/">![Screen Shot](/path/to/screenshot.png)</a>
+<a href="https://sunnecustombottle.netlify.app/">![Screen Shot](/src/assets/IMG/screenshot.png)</a>
 
 Welcome to the Custom Bottle Configurator, your tool for personalizing bottle colors. This project is designed to help users select the color of the cap, body, and base of a bottle, promoting the importance of recycling and eco-friendly products.
 
